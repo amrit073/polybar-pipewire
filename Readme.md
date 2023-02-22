@@ -37,7 +37,9 @@ label-muted = muted
 label-muted-foreground = ${colors.disabled}
 ```
 Add to you list of modules as:
+```
 modules-right  =   pulseaudio pipewire-microphone memory cpu date powermenu
+```
 
 <br>
 you might want to change the icons according to font your polybar is currently using
