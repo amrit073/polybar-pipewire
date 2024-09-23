@@ -1,7 +1,12 @@
 #!/bin/sh
 
 status() {
-	echo $(wpctl status | grep Sources -A2 | grep vol | sed s/[' '\]/\\n/g | tail -n1 | tr -d ] | cut -d. -f2)%
+	res=$(wpctl status | grep Sources -A2 | grep vol | cut -d: -f2 | tr -d ] | cut -c2- | sed 's/^0//' | tr -d .)
+	if echo "$res" | grep -q MUTED; then
+		echo muted
+	else
+		echo "$res"%
+	fi
 }
 
 listen() {
@@ -27,6 +32,10 @@ decrease() {
 	wpctl set-volume $(wpctl status | grep Sources -A2 | grep vol | cut -d. -f1 | tr -d [\│\*\ ]) 1%-
 }
 
+zerodb() {
+	wpctl set-volume $(wpctl status | grep Sources -A2 | grep vol | cut -d. -f1 | tr -d [\│\*\ ]) 100%
+}
+
 case "$1" in
 --toggle)
 	toggle
@@ -37,7 +46,10 @@ case "$1" in
 --decrease)
 	decrease
 	;;
+--zerodb)
+	zerodb
+	;;
 *)
-	listen
+	status
 	;;
 esac
