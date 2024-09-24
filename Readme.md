@@ -16,11 +16,11 @@ type = custom/script
 format = <label>
 format-prefix = " "
 format-prefix-foreground = ${colors.primary}
-label = %output%
-label-muted = 
+label = %output:3%
 exec = $HOME/.config/polybar/scripts/pipewire-microphone.sh
 tail = true
 click-left = $HOME/.config/polybar/scripts/pipewire-microphone.sh --toggle &
+click-right = $HOME/.config/polybar/scripts/pipewire-microphone.sh --zerodb &
 scroll-up = $HOME/.config/polybar/scripts/pipewire-microphone.sh --increase &
 scroll-down = $HOME/.config/polybar/scripts/pipewire-microphone.sh --decrease &
 
